@@ -67,7 +67,7 @@ function App() {
             <AstronomyPost
               title={item.title}
               description={item.explanation}
-              imageUrl={item.hdurl}
+              url={item.hdurl ? item.hdurl : item.url}
               date={item.date}
               liked={isLiked(item.title)}
               addLike={addLike}
