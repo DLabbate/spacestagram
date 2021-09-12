@@ -5,6 +5,7 @@
 
 .masonry {
   column-count: 1;
+  transform: translateX(0px);
 }
 
 @media (min-width: 640px) {
@@ -38,5 +39,9 @@
 }
 
 .masonry > * {
-  break-inside: avoid;
+  -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+  page-break-inside: avoid; /* Firefox */
+  break-inside: avoid; /* IE 10+ */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }

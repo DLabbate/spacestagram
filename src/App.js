@@ -5,6 +5,21 @@ import * as postApi from "./utils/api/post-api";
 
 function App() {
   const [astronomyPosts, setPosts] = useState([]);
+  const [likes, setLikes] = useState([]);
+
+  const addLike = (title) => {
+    setLikes([...likes, title]);
+  };
+
+  const removeLike = (title) => {
+    setLikes(likes.filter((like) => like != title));
+  };
+
+  const isLiked = (title) => {
+    const index = likes.indexOf(title);
+
+    return index > -1 ? true : false;
+  };
 
   /**
    * @param {Date} date the date to be formatted
@@ -39,15 +54,24 @@ function App() {
 
     updateAstronomyPosts();
   }, []);
+
+  useEffect(() => {
+    console.log(likes);
+  }, [likes]);
+
   return (
-    <div className="w-auto">
-      <div className="masonry m-4 p-4">
+    <div className="w-auto bg-gray-100">
+      <div className="masonry p-4">
         {astronomyPosts.map((item) => {
           return (
             <AstronomyPost
               title={item.title}
               description={item.explanation}
               imageUrl={item.hdurl}
+              date={item.date}
+              liked={isLiked(item.title)}
+              addLike={addLike}
+              removeLike={removeLike}
             />
           );
         })}
