@@ -5,14 +5,28 @@ import Header from "./components/Header";
 import * as postApi from "./utils/api/post-api";
 import Masonry from "./components/Masonry";
 import LoadingScreen from "./components/LoadingScreen";
-import { getDateMonthAgo, formatDate } from "./utils/helpers/date-helper";
+import { getDateMonthAgo } from "./utils/helpers/date-helper";
 
 function App() {
   const [astronomyPosts, setAstronomyPosts] = useState({
     loading: false,
     data: [],
   });
+
   const [likes, setLikes] = useState([]);
+
+  const [range, setRange] = useState({
+    startDate: getDateMonthAgo(),
+    endDate: new Date(),
+  });
+
+  const onDateChange = (dates) => {
+    const [start, end] = dates;
+    setRange({
+      startDate: start,
+      endDate: end,
+    });
+  };
 
   const addLike = (date) => {
     setLikes([...likes, date]);
@@ -28,27 +42,30 @@ function App() {
     return index > -1 ? true : false;
   };
 
-  let today = new Date();
-  let monthAgo = getDateMonthAgo();
-
   useEffect(() => {
     const updateAstronomyPosts = async () => {
       setAstronomyPosts({ loading: true, data: [] });
 
       const astronomyPosts = await postApi.getPosts(
-        formatDate(monthAgo),
-        formatDate(today)
+        range.startDate,
+        range.endDate
       );
 
       setAstronomyPosts({ loading: false, data: astronomyPosts });
     };
 
-    updateAstronomyPosts();
-  }, []);
+    if (range.startDate && range.endDate) {
+      updateAstronomyPosts();
+    }
+  }, [range]);
 
   useEffect(() => {
     console.log(likes);
   }, [likes]);
+
+  useEffect(() => {
+    console.log(range);
+  }, [range]);
 
   const AstronomyPosts = () => {
     return astronomyPosts.data.map((item) => {
@@ -69,7 +86,11 @@ function App() {
 
   return (
     <div className="w-auto bg-gray-100 relative">
-      <Header />
+      <Header
+        startDate={range.startDate}
+        endDate={range.endDate}
+        onDateChange={onDateChange}
+      />
       {astronomyPosts.loading ? (
         <LoadingScreen />
       ) : (
