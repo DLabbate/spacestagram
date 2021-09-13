@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: "Raleway", sans-serif;
+}
+
 .masonry {
   column-count: 1;
   transform: translateX(0px);
