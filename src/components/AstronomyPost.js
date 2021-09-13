@@ -1,5 +1,4 @@
 import React from "react";
-import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { FiHeart } from "react-icons/fi";
 import "./AstronomyPost.css";
 const AstronomyPost = ({
@@ -36,7 +35,7 @@ const AstronomyPost = ({
 
         <button
           onClick={() => {
-            liked ? removeLike(title) : addLike(title);
+            liked ? removeLike(date) : addLike(date);
           }}
         >
           <FiHeart

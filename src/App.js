@@ -8,20 +8,22 @@ import LoadingScreen from "./components/LoadingScreen";
 import { getDateMonthAgo, formatDate } from "./utils/helpers/date-helper";
 
 function App() {
-  const [astronomyPosts, setPosts] = useState(null);
+  const [astronomyPosts, setAstronomyPosts] = useState({
+    loading: false,
+    data: [],
+  });
   const [likes, setLikes] = useState([]);
-  const [loading, setLoading] = useState(true);
 
-  const addLike = (title) => {
-    setLikes([...likes, title]);
+  const addLike = (date) => {
+    setLikes([...likes, date]);
   };
 
-  const removeLike = (title) => {
-    setLikes(likes.filter((like) => like != title));
+  const removeLike = (date) => {
+    setLikes(likes.filter((like) => like !== date));
   };
 
-  const isLiked = (title) => {
-    const index = likes.indexOf(title);
+  const isLiked = (date) => {
+    const index = likes.indexOf(date);
 
     return index > -1 ? true : false;
   };
@@ -31,19 +33,14 @@ function App() {
 
   useEffect(() => {
     const updateAstronomyPosts = async () => {
-      setLoading(true);
-
-      // console.log(formatDate(monthAgo));
+      setAstronomyPosts({ loading: true, data: [] });
 
       const astronomyPosts = await postApi.getPosts(
         formatDate(monthAgo),
         formatDate(today)
       );
 
-      // console.log(astronomyPosts);
-
-      setPosts(astronomyPosts);
-      setLoading(false);
+      setAstronomyPosts({ loading: false, data: astronomyPosts });
     };
 
     updateAstronomyPosts();
@@ -54,14 +51,14 @@ function App() {
   }, [likes]);
 
   const AstronomyPosts = () => {
-    return astronomyPosts.map((item) => {
+    return astronomyPosts.data.map((item) => {
       return (
         <AstronomyPost
           title={item.title}
           description={item.explanation}
           url={item.hdurl ? item.hdurl : item.url}
           date={item.date}
-          liked={isLiked(item.title)}
+          liked={isLiked(item.date)}
           addLike={addLike}
           removeLike={removeLike}
           mediaType={item.media_type}
@@ -73,12 +70,12 @@ function App() {
   return (
     <div className="w-auto bg-gray-100 relative">
       <Header />
-      {astronomyPosts && !loading ? (
+      {astronomyPosts.loading ? (
+        <LoadingScreen />
+      ) : (
         <Masonry>
           <AstronomyPosts />
         </Masonry>
-      ) : (
-        <LoadingScreen />
       )}
     </div>
   );
