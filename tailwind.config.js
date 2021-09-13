@@ -7,6 +7,9 @@ module.exports = {
         red: theme("colors.red.500"),
         grey: theme("colors.gray.100"),
       }),
+      animation: {
+        "spin-slow": "spin 3s linear infinite",
+      },
     },
   },
   variants: {

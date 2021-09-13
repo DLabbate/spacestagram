@@ -5,6 +5,7 @@ import "./AstronomyPost.css";
 const AstronomyPost = ({
   title,
   description,
+  mediaType,
   url,
   date,
   liked,
@@ -13,12 +14,13 @@ const AstronomyPost = ({
 }) => {
   return (
     <div className="w-auto m-4 shadow-lg rounded-2xl inline-block relative bg-white">
-      {url.includes("youtube") ? (
+      {mediaType === "video" ? (
         <iframe
           className="object-cover rounded-t-2xl w-full"
           src={url}
           alt="Astronomy"
           title={title}
+          allowFullScreen
         ></iframe>
       ) : (
         <img
