@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import AstronomyPost from "./components/AstronomyPost";
+import Header from "./components/Header";
 import * as postApi from "./utils/api/post-api";
+import Masonry from "./components/Masonry";
+import LoadingScreen from "./components/LoadingScreen";
 import { getDateMonthAgo, formatDate } from "./utils/helpers/date-helper";
 
 function App() {
@@ -68,19 +71,15 @@ function App() {
   };
 
   return (
-    <div className="w-auto bg-gray-100">
-      <div className="masonry p-4">
-        {astronomyPosts && !loading ? (
+    <div className="w-auto bg-gray-100 relative">
+      <Header />
+      {astronomyPosts && !loading ? (
+        <Masonry>
           <AstronomyPosts />
-        ) : (
-          <div className="w-screen h-screen relative">
-            <img
-              src="https://img-premium.flaticon.com/png/512/2120/premium/2120463.png?token=exp=1631483618~hmac=f3c1ceb4e09bee762a0607b6993be025"
-              className="absolute m-auto top-0 bottom-0 left-0 right-0 animate-spin-slow w-16 h-16"
-            />
-          </div>
-        )}
-      </div>
+        </Masonry>
+      ) : (
+        <LoadingScreen />
+      )}
     </div>
   );
 }
