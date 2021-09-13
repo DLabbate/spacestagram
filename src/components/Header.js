@@ -16,7 +16,6 @@ const Header = ({ startDate, endDate, onDateChange }) => {
       </div>
 
       <div className="bg-gray-100 flex justify-center items-center">
-        {/* <label>Select Range 📅</label> */}
         <DatePicker
           selected={startDate}
           onChange={onDateChange}

@@ -13,7 +13,13 @@ function App() {
     data: [],
   });
 
-  const [likes, setLikes] = useState([]);
+  const getLocalStorage = (key) => {
+    const saved = localStorage.getItem(key);
+    const initialValue = JSON.parse(saved);
+    return initialValue || [];
+  };
+
+  const [likes, setLikes] = useState(getLocalStorage("likes"));
 
   const [range, setRange] = useState({
     startDate: getDateMonthAgo(),
@@ -59,7 +65,9 @@ function App() {
     }
   }, [range]);
 
+  // Save to local storage
   useEffect(() => {
+    localStorage.setItem("likes", JSON.stringify(likes));
     console.log(likes);
   }, [likes]);
 
@@ -71,6 +79,7 @@ function App() {
     return astronomyPosts.data.map((item) => {
       return (
         <AstronomyPost
+          key={item.date}
           title={item.title}
           description={item.explanation}
           url={item.hdurl ? item.hdurl : item.url}
