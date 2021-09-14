@@ -37,7 +37,7 @@ const AstronomyPost = ({
       <div className="m-6">
         <h3 className="text-lg font-bold">{title}</h3>
         <h4 className="text-sm">{date}</h4>
-        <p>{description}</p>
+        <p className="mt-4">{description}</p>
 
         <button
           onClick={() => {
