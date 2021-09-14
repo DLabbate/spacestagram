@@ -1,7 +1,6 @@
 import React from "react";
 import { FiHeart } from "react-icons/fi";
 import "./AstronomyPost.css";
-import { useInView } from "react-intersection-observer";
 
 const AstronomyPost = ({
   title,
@@ -13,11 +12,6 @@ const AstronomyPost = ({
   addLike,
   removeLike,
 }) => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    rootMargin: "200px 0px",
-  });
-
   const Media = () => {
     return mediaType === "video" ? (
       <iframe
@@ -63,12 +57,8 @@ const AstronomyPost = ({
   };
 
   return (
-    <div
-      className="w-auto m-4 shadow-lg rounded-2xl inline-block relative bg-white"
-      ref={ref}
-    >
-      {inView ? <Media /> : null}
-
+    <div className="w-auto m-4 shadow-lg rounded-2xl inline-block relative bg-white">
+      <Media />
       <Content />
     </div>
   );
