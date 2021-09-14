@@ -76,7 +76,7 @@ function App() {
           key={item.date}
           title={item.title}
           description={item.explanation}
-          url={item.hdurl ? item.hdurl : item.url}
+          url={item.url}
           date={item.date}
           liked={isLiked(item.date)}
           addLike={addLike}
