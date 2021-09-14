@@ -8,16 +8,16 @@ import LoadingScreen from "./components/LoadingScreen";
 import { getDateMonthAgo } from "./utils/helpers/date-helper";
 
 function App() {
-  const [astronomyPosts, setAstronomyPosts] = useState({
-    loading: false,
-    data: [],
-  });
-
   const getLocalStorage = (key) => {
     const saved = localStorage.getItem(key);
     const initialValue = JSON.parse(saved);
     return initialValue || [];
   };
+
+  const [astronomyPosts, setAstronomyPosts] = useState({
+    loading: false,
+    data: [],
+  });
 
   const [likes, setLikes] = useState(getLocalStorage("likes"));
 
@@ -44,7 +44,6 @@ function App() {
 
   const isLiked = (date) => {
     const index = likes.indexOf(date);
-
     return index > -1 ? true : false;
   };
 
@@ -68,12 +67,7 @@ function App() {
   // Save to local storage
   useEffect(() => {
     localStorage.setItem("likes", JSON.stringify(likes));
-    console.log(likes);
   }, [likes]);
-
-  useEffect(() => {
-    console.log(range);
-  }, [range]);
 
   const AstronomyPosts = () => {
     return astronomyPosts.data.map((item) => {

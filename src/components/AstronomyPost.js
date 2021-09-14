@@ -61,6 +61,7 @@ const AstronomyPost = ({
       </div>
     );
   };
+
   return (
     <div
       className="w-auto m-4 shadow-lg rounded-2xl inline-block relative bg-white"
