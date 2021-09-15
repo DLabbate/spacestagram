@@ -27,9 +27,9 @@ export const formatDateCommas = (date) => {
     "November",
     "December",
   ];
-  const month = monthNames[date.getMonth()];
-  const day = date.getDate();
-  const year = date.getFullYear();
+  const month = monthNames[date.getUTCMonth()];
+  const day = date.getUTCDate();
+  const year = date.getUTCFullYear();
 
   return `${month} ${day}, ${year}`;
 };
@@ -42,7 +42,7 @@ export const formatDateCommas = (date) => {
 export const getDateMonthAgo = (date) => {
   let newDate = new Date(date);
   // Set it to one month ago
-  newDate.setMonth(date.getMonth() - 1);
+  newDate.setMonth(date.getUTCMonth() - 1);
 
   return newDate;
 };

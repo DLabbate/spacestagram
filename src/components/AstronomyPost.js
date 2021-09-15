@@ -46,6 +46,7 @@ const AstronomyPost = ({
           }}
         >
           <FiHeart
+            data-testid="heart-icon"
             className={
               liked
                 ? "absolute w-6 h-6 right-4 top-4 heart--active"
