@@ -1,9 +1,37 @@
 /**
+ * Formats a date in YYYY-MM-DD
  * @param {Date} date - the date to be formatted
  * @returns {string} YYYY-MM-DD format, e.g "2021-04-17"
  */
 export const formatDate = (date) => {
   return date.toISOString().split("T")[0];
+};
+
+/**
+ * Formats a date with commas for better visual representation, e.g. "April 17, 2021"
+ * @param {Date} date - the date to be formatted
+ * @returns {string} "{Month} {Day}, {Year}" e.g. "April 17, 2021"
+ */
+export const formatDateCommas = (date) => {
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const month = monthNames[date.getUTCMonth()];
+  const day = date.getUTCDate();
+  const year = date.getUTCFullYear();
+
+  return `${month} ${day}, ${year}`;
 };
 
 /**
@@ -14,7 +42,7 @@ export const formatDate = (date) => {
 export const getDateMonthAgo = (date) => {
   let newDate = new Date(date);
   // Set it to one month ago
-  newDate.setMonth(date.getMonth() - 1);
+  newDate.setMonth(date.getUTCMonth() - 1);
 
   return newDate;
 };

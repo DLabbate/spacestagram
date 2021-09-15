@@ -1,5 +1,6 @@
 import React from "react";
 import { FiHeart } from "react-icons/fi";
+import { formatDateCommas } from "../utils/helpers/date-helper";
 import "./AstronomyPost.css";
 
 const AstronomyPost = ({
@@ -36,7 +37,7 @@ const AstronomyPost = ({
     return (
       <div className="m-6">
         <h3 className="text-lg font-bold">{title}</h3>
-        <h4 className="text-sm">{date}</h4>
+        <h4 className="text-sm">{formatDateCommas(new Date(date))}</h4>
         <p className="mt-4">{description}</p>
 
         <button
@@ -45,6 +46,7 @@ const AstronomyPost = ({
           }}
         >
           <FiHeart
+            data-testid="heart-icon"
             className={
               liked
                 ? "absolute w-6 h-6 right-4 top-4 heart--active"
