@@ -22,7 +22,7 @@ function App() {
   const [likes, setLikes] = useState(getLocalStorage("likes"));
 
   const [range, setRange] = useState({
-    startDate: getDateMonthAgo(),
+    startDate: getDateMonthAgo(new Date()),
     endDate: new Date(),
   });
 
