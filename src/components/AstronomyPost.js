@@ -1,18 +1,26 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { FiHeart } from "react-icons/fi";
 import { formatDateCommas } from "../utils/helpers/date/date-helper";
+import {
+  addToLocalStorage,
+  isLiked,
+  removeFromLocalStorage,
+} from "../utils/helpers/local-storage/local-storage-helper";
 import "./AstronomyPost.css";
 
-const AstronomyPost = ({
-  title,
-  description,
-  mediaType,
-  url,
-  date,
-  liked,
-  addLike,
-  removeLike,
-}) => {
+const AstronomyPost = ({ title, description, mediaType, url, date }) => {
+  const [liked, setLiked] = useState(isLiked(date));
+
+  const addLike = () => {
+    setLiked(true);
+    addToLocalStorage(date);
+  };
+
+  const removeLike = () => {
+    setLiked(false);
+    removeFromLocalStorage(date);
+  };
+
   const getSize = () => {
     const wordCount = description.split(" ").length;
     if (wordCount <= 130) {
@@ -67,11 +75,7 @@ const AstronomyPost = ({
         <h4 className="text-sm">{formatDateCommas(new Date(date))}</h4>
         <p className="mt-4">{description}</p>
 
-        <button
-          onClick={() => {
-            liked ? removeLike(date) : addLike(date);
-          }}
-        >
+        <button onClick={liked ? removeLike : addLike}>
           <FiHeart
             data-testid="heart-icon"
             className={

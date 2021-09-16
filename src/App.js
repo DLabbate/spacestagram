@@ -6,18 +6,12 @@ import * as postApi from "./utils/api/post-api";
 import Masonry from "./components/Masonry";
 import LoadingScreen from "./components/LoadingScreen";
 import { getDateMonthAgo } from "./utils/helpers/date/date-helper";
-import {
-  getLocalStorage,
-  setLocalStorage,
-} from "./utils/helpers/local-storage/local-storage-helper";
 
 function App() {
   const [astronomyPosts, setAstronomyPosts] = useState({
     loading: false,
     data: [],
   });
-
-  const [likes, setLikes] = useState(getLocalStorage("likes"));
 
   const [range, setRange] = useState({
     startDate: getDateMonthAgo(new Date()),
@@ -30,19 +24,6 @@ function App() {
       startDate: start,
       endDate: end,
     });
-  };
-
-  const addLike = (date) => {
-    setLikes([...likes, date]);
-  };
-
-  const removeLike = (date) => {
-    setLikes(likes.filter((like) => like !== date));
-  };
-
-  const isLiked = (date) => {
-    const index = likes.indexOf(date);
-    return index > -1 ? true : false;
   };
 
   useEffect(() => {
@@ -62,11 +43,6 @@ function App() {
     }
   }, [range]);
 
-  // Save to local storage
-  useEffect(() => {
-    setLocalStorage("likes", likes);
-  }, [likes]);
-
   const AstronomyPosts = () => {
     return astronomyPosts.data.map((item) => {
       return (
@@ -76,9 +52,6 @@ function App() {
           description={item.explanation}
           url={item.url}
           date={item.date}
-          liked={isLiked(item.date)}
-          addLike={addLike}
-          removeLike={removeLike}
           mediaType={item.media_type}
         />
       );
