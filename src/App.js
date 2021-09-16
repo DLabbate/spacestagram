@@ -5,15 +5,13 @@ import Header from "./components/Header";
 import * as postApi from "./utils/api/post-api";
 import Masonry from "./components/Masonry";
 import LoadingScreen from "./components/LoadingScreen";
-import { getDateMonthAgo } from "./utils/helpers/date-helper";
+import { getDateMonthAgo } from "./utils/helpers/date/date-helper";
+import {
+  getLocalStorage,
+  setLocalStorage,
+} from "./utils/helpers/local-storage/local-storage-helper";
 
 function App() {
-  const getLocalStorage = (key) => {
-    const saved = localStorage.getItem(key);
-    const initialValue = JSON.parse(saved);
-    return initialValue || [];
-  };
-
   const [astronomyPosts, setAstronomyPosts] = useState({
     loading: false,
     data: [],
@@ -66,7 +64,7 @@ function App() {
 
   // Save to local storage
   useEffect(() => {
-    localStorage.setItem("likes", JSON.stringify(likes));
+    setLocalStorage("likes", likes);
   }, [likes]);
 
   const AstronomyPosts = () => {

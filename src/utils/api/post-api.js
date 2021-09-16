@@ -1,4 +1,4 @@
-import { formatDate } from "../helpers/date-helper";
+import { formatDate } from "../helpers/date/date-helper";
 
 export const getPosts = async (startDate, endDate) => {
   var requestOptions = {

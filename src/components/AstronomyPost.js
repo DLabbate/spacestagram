@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { FiHeart } from "react-icons/fi";
-import { formatDateCommas } from "../utils/helpers/date-helper";
+import { formatDateCommas } from "../utils/helpers/date/date-helper";
 import "./AstronomyPost.css";
 
 const AstronomyPost = ({
