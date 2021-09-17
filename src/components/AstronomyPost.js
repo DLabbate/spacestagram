@@ -7,9 +7,15 @@ import {
   removeFromLocalStorage,
 } from "../utils/helpers/local-storage/local-storage-helper";
 import "./AstronomyPost.css";
+import { useInView } from "react-intersection-observer";
 
 const AstronomyPost = ({ title, description, mediaType, url, date }) => {
   const [liked, setLiked] = useState(isLiked(date));
+
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    rootMargin: "200px 0px",
+  });
 
   const addLike = () => {
     setLiked(true);
@@ -47,23 +53,27 @@ const AstronomyPost = ({ title, description, mediaType, url, date }) => {
   const Media = () => {
     return mediaType === "video" ? (
       <div className={`w-full relative ${getImagePadding()}`}>
-        <iframe
-          className="object-cover rounded-t-2xl w-full h-full absolute left-0 top-0"
-          src={url}
-          alt="Astronomy"
-          title={title}
-          allowFullScreen
-          loading="lazy"
-        ></iframe>
+        {inView ? (
+          <iframe
+            className="object-cover rounded-t-2xl w-full h-full absolute left-0 top-0"
+            src={url}
+            alt="Astronomy"
+            title={title}
+            allowFullScreen
+            loading="lazy"
+          ></iframe>
+        ) : null}
       </div>
     ) : (
       <div className={`w-full relative ${getImagePadding()}`}>
-        <img
-          className="object-cover rounded-t-2xl w-full h-full absolute left-0 top-0"
-          src={url}
-          alt="Astronomy"
-          loading="lazy"
-        />
+        {inView ? (
+          <img
+            className="object-cover rounded-t-2xl w-full h-full absolute left-0 top-0"
+            src={url}
+            alt="Astronomy"
+            loading="lazy"
+          />
+        ) : null}
       </div>
     );
   };
@@ -89,8 +99,22 @@ const AstronomyPost = ({ title, description, mediaType, url, date }) => {
     );
   };
 
+  const Skeleton = () => {
+    return (
+      <div className="w-full h-full z-10 bg-white opacity-100 absolute left-0 top-0 rounded-2xl">
+        <div className={`w-full relative ${getImagePadding()}`}>
+          <div className="object-cover rounded-t-2xl w-full h-full absolute left-0 top-0 bg-gray-200 animate-pulse" />
+        </div>
+        <div className="bg-gray-200 animate-pulse h-4 m-4"></div>
+        <div className="bg-gray-200 animate-pulse h-4 m-4"></div>
+        <div className="bg-gray-200 animate-pulse h-4 m-4"></div>
+        <div className="bg-gray-200 animate-pulse h-4 m-4"></div>
+      </div>
+    );
+  };
   return (
     <div
+      ref={ref}
       className={`w-auto m-4 shadow-lg rounded-2xl inline-block relative bg-white`}
     >
       <Media />
