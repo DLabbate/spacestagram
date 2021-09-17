@@ -2,6 +2,7 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import AstronomyPost from "./AstronomyPost";
+import { mockAllIsIntersecting } from "react-intersection-observer/test-utils";
 
 const mockAstronomyPost = {
   copyright: "Gabriel Funes",
@@ -14,10 +15,7 @@ const mockAstronomyPost = {
   url: "https://apod.nasa.gov/apod/image/2107/IMG_2021_07_08_29558_APOD1024.jpg",
 };
 
-const addLike = jest.fn();
-const removeLike = jest.fn();
-
-test("astronomy post should render correctly (not liked)", () => {
+test("astronomy post should render correctly", () => {
   const astronomyPost = render(
     <AstronomyPost
       key={mockAstronomyPost.date}
@@ -25,12 +23,11 @@ test("astronomy post should render correctly (not liked)", () => {
       description={mockAstronomyPost.explanation}
       url={mockAstronomyPost.url}
       date={mockAstronomyPost.date}
-      liked={false}
-      addLike={addLike}
-      removeLike={removeLike}
       mediaType={mockAstronomyPost.media_type}
     />
   );
+
+  mockAllIsIntersecting(false);
 
   expect(astronomyPost.getByText("July 10, 2021")).toBeTruthy();
   expect(astronomyPost.getByText(mockAstronomyPost.title)).toBeTruthy();
@@ -39,13 +36,10 @@ test("astronomy post should render correctly (not liked)", () => {
   expect(astronomyPost.getByTestId("heart-icon")).not.toHaveClass(
     "heart--active"
   );
-  expect(astronomyPost.getByRole("img")).toHaveAttribute(
-    "src",
-    mockAstronomyPost.url
-  );
+  expect(astronomyPost.getByTestId("image-placeholder")).toBeTruthy();
 });
 
-test("astronomy post should render correctly (liked)", () => {
+test("astronomy post should load image", async () => {
   const astronomyPost = render(
     <AstronomyPost
       key={mockAstronomyPost.date}
@@ -53,57 +47,40 @@ test("astronomy post should render correctly (liked)", () => {
       description={mockAstronomyPost.explanation}
       url={mockAstronomyPost.url}
       date={mockAstronomyPost.date}
-      liked={true}
-      addLike={addLike}
-      removeLike={removeLike}
       mediaType={mockAstronomyPost.media_type}
     />
   );
 
-  expect(astronomyPost.getByText("July 10, 2021")).toBeTruthy();
-  expect(astronomyPost.getByText(mockAstronomyPost.title)).toBeTruthy();
-  expect(astronomyPost.getByText(mockAstronomyPost.explanation)).toBeTruthy();
+  expect(astronomyPost.getByTestId("image-placeholder")).toBeTruthy();
+
+  mockAllIsIntersecting(true);
+
+  fireEvent.load(astronomyPost.getByRole("img"));
+
+  const image = astronomyPost.getByRole("img");
+  expect(image).toHaveAttribute("src", mockAstronomyPost.url);
+  expect(image).toHaveAttribute("alt", "Astronomy");
+});
+
+test("astronomy post should be liked and unliked when clicking heart icon", () => {
+  const astronomyPost = render(
+    <AstronomyPost
+      key={mockAstronomyPost.date}
+      title={mockAstronomyPost.title}
+      description={mockAstronomyPost.explanation}
+      url={mockAstronomyPost.url}
+      date={mockAstronomyPost.date}
+      mediaType={mockAstronomyPost.media_type}
+    />
+  );
+
+  fireEvent.click(astronomyPost.getByTestId("heart-icon"));
+  expect(astronomyPost.getByTestId("heart-icon")).not.toHaveClass("heart");
   expect(astronomyPost.getByTestId("heart-icon")).toHaveClass("heart--active");
-  expect(astronomyPost.getByRole("img")).toHaveAttribute(
-    "src",
-    mockAstronomyPost.url
-  );
-});
-
-test("astronomy post should call addLike callback", () => {
-  const astronomyPost = render(
-    <AstronomyPost
-      key={mockAstronomyPost.date}
-      title={mockAstronomyPost.title}
-      description={mockAstronomyPost.explanation}
-      url={mockAstronomyPost.url}
-      date={mockAstronomyPost.date}
-      liked={false}
-      addLike={addLike}
-      removeLike={removeLike}
-      mediaType={mockAstronomyPost.media_type}
-    />
-  );
 
   fireEvent.click(astronomyPost.getByTestId("heart-icon"));
-  expect(addLike).toHaveBeenCalledTimes(1);
-});
-
-test("astronomy post should call removeLike callback", () => {
-  const astronomyPost = render(
-    <AstronomyPost
-      key={mockAstronomyPost.date}
-      title={mockAstronomyPost.title}
-      description={mockAstronomyPost.explanation}
-      url={mockAstronomyPost.url}
-      date={mockAstronomyPost.date}
-      liked={true}
-      addLike={addLike}
-      removeLike={removeLike}
-      mediaType={mockAstronomyPost.media_type}
-    />
+  expect(astronomyPost.getByTestId("heart-icon")).toHaveClass("heart");
+  expect(astronomyPost.getByTestId("heart-icon")).not.toHaveClass(
+    "heart--active"
   );
-
-  fireEvent.click(astronomyPost.getByTestId("heart-icon"));
-  expect(removeLike).toHaveBeenCalledTimes(1);
 });

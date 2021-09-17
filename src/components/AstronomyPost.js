@@ -53,7 +53,10 @@ const AstronomyPost = ({ title, description, mediaType, url, date }) => {
 
   const ImagePlaceholder = () => {
     return (
-      <div className="w-full h-full absolute left-0 top-0 bg-white rounded-t-2xl">
+      <div
+        data-testid="image-placeholder"
+        className="w-full h-full absolute left-0 top-0 bg-white rounded-t-2xl"
+      >
         <div className="w-full h-full bg-gray-300 animate-pulse rounded-t-2xl"></div>
       </div>
     );
