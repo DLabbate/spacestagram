@@ -13,15 +13,18 @@ const Header = ({ startDate, endDate, onDateChange }) => {
       </div>
 
       <div className="bg-gray-100 flex justify-center items-center">
-        <DatePicker
-          selected={startDate}
-          onChange={onDateChange}
-          startDate={startDate}
-          endDate={endDate}
-          maxDate={new Date()}
-          selectsRange
-          className="bg-gray-100"
-        />
+        <label>
+          Date Range
+          <DatePicker
+            selected={startDate}
+            onChange={onDateChange}
+            startDate={startDate}
+            endDate={endDate}
+            maxDate={new Date()}
+            selectsRange
+            className="bg-gray-100 m-2"
+          />
+        </label>
       </div>
     </div>
   );

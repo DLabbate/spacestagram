@@ -107,7 +107,7 @@ const AstronomyPost = ({ title, description, mediaType, url, date }) => {
         <h4 className="text-sm">{formatDateCommas(new Date(date))}</h4>
         <p className="mt-4">{description}</p>
 
-        <button onClick={liked ? removeLike : addLike}>
+        <button onClick={liked ? removeLike : addLike} aria-label="like">
           <FiHeart
             data-testid="heart-icon"
             className={
