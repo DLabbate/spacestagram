@@ -11,6 +11,7 @@ import { useInView } from "react-intersection-observer";
 
 const AstronomyPost = ({ title, description, mediaType, url, date }) => {
   const [liked, setLiked] = useState(isLiked(date));
+  const [loaded, setLoaded] = useState(false);
 
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -50,30 +51,48 @@ const AstronomyPost = ({ title, description, mediaType, url, date }) => {
     }
   };
 
+  const ImagePlaceholder = () => {
+    return (
+      <div className="w-full h-full absolute left-0 top-0 bg-white rounded-t-2xl">
+        <div className="w-full h-full bg-gray-300 animate-pulse rounded-t-2xl"></div>
+      </div>
+    );
+  };
+
   const Media = () => {
     return mediaType === "video" ? (
       <div className={`w-full relative ${getImagePadding()}`}>
         {inView ? (
           <iframe
-            className="object-cover rounded-t-2xl w-full h-full absolute left-0 top-0"
+            className={`object-cover rounded-t-2xl w-full h-full absolute left-0 top-0 ${
+              loaded ? "visible" : "invisible"
+            }`}
             src={url}
             alt="Astronomy"
             title={title}
             allowFullScreen
             loading="lazy"
+            onLoad={() => setLoaded(true)}
           ></iframe>
         ) : null}
+
+        {loaded ? null : <ImagePlaceholder />}
       </div>
     ) : (
       <div className={`w-full relative ${getImagePadding()}`}>
         {inView ? (
           <img
-            className="object-cover rounded-t-2xl w-full h-full absolute left-0 top-0"
+            className={`object-cover rounded-t-2xl w-full h-full absolute left-0 top-0 ${
+              loaded ? "visible" : "invisible"
+            }`}
             src={url}
             alt="Astronomy"
             loading="lazy"
+            onLoad={() => setLoaded(true)}
           />
         ) : null}
+
+        {loaded ? null : <ImagePlaceholder />}
       </div>
     );
   };
