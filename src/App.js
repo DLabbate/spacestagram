@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import AstronomyPost from "./components/AstronomyPost";
-import Header from "./components/Header";
-import * as postApi from "./utils/api/post-api";
-import Masonry from "./components/Masonry";
-import LoadingScreen from "./components/LoadingScreen";
+import AstronomyPost from "./components/AstronomyPost/AstronomyPost";
+import Header from "./components/Header/Header";
+import * as astronomyApi from "./utils/api/astronomy-api";
+import Masonry from "./components/Masonry/Masonry";
+import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
 import { getDateMonthAgo } from "./utils/helpers/date/date-helper";
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
     const updateAstronomyPosts = async () => {
       setAstronomyPosts({ loading: true, data: [] });
 
-      const astronomyPosts = await postApi.getPosts(
+      const astronomyPosts = await astronomyApi.getPosts(
         range.startDate,
         range.endDate
       );

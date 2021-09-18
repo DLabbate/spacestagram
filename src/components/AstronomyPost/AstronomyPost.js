@@ -1,11 +1,11 @@
 import React, { useRef, useState } from "react";
 import { FiHeart } from "react-icons/fi";
-import { formatDateCommas } from "../utils/helpers/date/date-helper";
+import { formatDateCommas } from "../../utils/helpers/date/date-helper";
 import {
   addToLocalStorage,
   isLiked,
   removeFromLocalStorage,
-} from "../utils/helpers/local-storage/local-storage-helper";
+} from "../../utils/helpers/local-storage/local-storage-helper";
 import "./AstronomyPost.css";
 import { useInView } from "react-intersection-observer";
 
