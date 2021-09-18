@@ -51,51 +51,52 @@ const AstronomyPost = ({ title, description, mediaType, url, date }) => {
     }
   };
 
-  const ImagePlaceholder = () => {
+  const IFrame = () => {
+    return inView ? (
+      <iframe
+        className={`object-cover rounded-t-2xl w-full h-full absolute left-0 top-0 ${
+          loaded ? "visible" : "invisible"
+        }`}
+        src={url}
+        alt="NASA Astronomy"
+        title={title}
+        allowFullScreen
+        loading="lazy"
+        onLoad={() => setLoaded(true)}
+      ></iframe>
+    ) : null;
+  };
+
+  const Image = () => {
+    return inView ? (
+      <img
+        className={`object-cover rounded-t-2xl w-full h-full absolute left-0 top-0 ${
+          loaded ? "visible" : "invisible"
+        }`}
+        src={url}
+        alt="NASA Astronomy"
+        loading="lazy"
+        onLoad={() => setLoaded(true)}
+      />
+    ) : null;
+  };
+
+  const Media = () => {
+    return (
+      <div className={`w-full relative ${getImagePadding()}`}>
+        {mediaType === "video" ? <IFrame /> : <Image />}
+        {loaded ? null : <MediaPlaceholder />}
+      </div>
+    );
+  };
+
+  const MediaPlaceholder = () => {
     return (
       <div
         data-testid="image-placeholder"
         className="w-full h-full absolute left-0 top-0 bg-white rounded-t-2xl"
       >
         <div className="w-full h-full bg-gray-300 animate-pulse rounded-t-2xl"></div>
-      </div>
-    );
-  };
-
-  const Media = () => {
-    return mediaType === "video" ? (
-      <div className={`w-full relative ${getImagePadding()}`}>
-        {inView ? (
-          <iframe
-            className={`object-cover rounded-t-2xl w-full h-full absolute left-0 top-0 ${
-              loaded ? "visible" : "invisible"
-            }`}
-            src={url}
-            alt="Astronomy"
-            title={title}
-            allowFullScreen
-            loading="lazy"
-            onLoad={() => setLoaded(true)}
-          ></iframe>
-        ) : null}
-
-        {loaded ? null : <ImagePlaceholder />}
-      </div>
-    ) : (
-      <div className={`w-full relative ${getImagePadding()}`}>
-        {inView ? (
-          <img
-            className={`object-cover rounded-t-2xl w-full h-full absolute left-0 top-0 ${
-              loaded ? "visible" : "invisible"
-            }`}
-            src={url}
-            alt="Astronomy"
-            loading="lazy"
-            onLoad={() => setLoaded(true)}
-          />
-        ) : null}
-
-        {loaded ? null : <ImagePlaceholder />}
       </div>
     );
   };
@@ -121,19 +122,6 @@ const AstronomyPost = ({ title, description, mediaType, url, date }) => {
     );
   };
 
-  const Skeleton = () => {
-    return (
-      <div className="w-full h-full z-10 bg-white opacity-100 absolute left-0 top-0 rounded-2xl">
-        <div className={`w-full relative ${getImagePadding()}`}>
-          <div className="object-cover rounded-t-2xl w-full h-full absolute left-0 top-0 bg-gray-200 animate-pulse" />
-        </div>
-        <div className="bg-gray-200 animate-pulse h-4 m-4"></div>
-        <div className="bg-gray-200 animate-pulse h-4 m-4"></div>
-        <div className="bg-gray-200 animate-pulse h-4 m-4"></div>
-        <div className="bg-gray-200 animate-pulse h-4 m-4"></div>
-      </div>
-    );
-  };
   return (
     <div
       ref={ref}
