@@ -43,7 +43,7 @@ The fetched data is displayed in a responsive "masonry" layout.
 <img src="./src/assets/documentation/url.gif" />
 
 ### Testing
-I implemented some unit tests using `jest` and `react-testing-library`. An example outlined below:
+I implemented unit tests using `jest` and `react-testing-library`. This was used to verify the functionality of various helper methods, as well as verify that components render properly. Some examples are outlined below:
 
 ```javascript
 const date = new Date(2021, 3, 17);
@@ -54,7 +54,32 @@ test("date is formatted in YYYY-MM-DD", () => {
 });
 ```
 
-Note that the testing in this project is not comprehensive, but a work in progress that I would like to continue improving!
+```javascript
+test("astronomy post should be liked and unliked when clicking heart icon", () => {
+  const astronomyPost = render(
+    <AstronomyPost
+      key={mockAstronomyPost.date}
+      title={mockAstronomyPost.title}
+      description={mockAstronomyPost.explanation}
+      url={mockAstronomyPost.url}
+      date={mockAstronomyPost.date}
+      mediaType={mockAstronomyPost.media_type}
+    />
+  );
+
+  fireEvent.click(astronomyPost.getByTestId("heart-icon"));
+  expect(astronomyPost.getByTestId("heart-icon")).not.toHaveClass("heart");
+  expect(astronomyPost.getByTestId("heart-icon")).toHaveClass("heart--active");
+
+  fireEvent.click(astronomyPost.getByTestId("heart-icon"));
+  expect(astronomyPost.getByTestId("heart-icon")).toHaveClass("heart");
+  expect(astronomyPost.getByTestId("heart-icon")).not.toHaveClass(
+    "heart--active"
+  );
+});
+```
+
+Note that the testing in this project is not comprehensive, but a work in progress that I would like to continue improving! I used this as an opportunity to learn more about testing methodologies and frameworks.
 
 ## References
 * <a href="https://www.flaticon.com/">Icons made by Flaticon</a>
