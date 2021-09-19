@@ -36,7 +36,7 @@ The fetched data is displayed in a responsive "masonry" layout.
 ### Lazy Loading Images
 <img src="./src/assets/documentation/lazy-loading.gif" />
 
-### Heartbeat Animation (on hover)
+### Heartbeat Animation (On Hover)
 <img src="./src/assets/documentation/heartbeat.gif" />
 
 ### URL Link
