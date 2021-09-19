@@ -34,8 +34,8 @@
 
 .astronomy-post__title {
   display: inline;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, #dbeafe 50%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, #93c5fd 50%);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, #e0e7ff 50%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, #c7d2fe 50%);
   transition: 500ms;
   background-size: 100% 100%, 0 100%;
   background-position: 100% 100%, 0 100%;
