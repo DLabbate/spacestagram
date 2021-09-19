@@ -59,7 +59,7 @@ test("astronomy post should load image", async () => {
 
   const image = astronomyPost.getByRole("img");
   expect(image).toHaveAttribute("src", mockAstronomyPost.url);
-  expect(image).toHaveAttribute("alt", "Astronomy");
+  expect(image).toHaveAttribute("alt", "NASA Astronomy");
 });
 
 test("astronomy post should be liked and unliked when clicking heart icon", () => {
