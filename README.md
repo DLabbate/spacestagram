@@ -1,7 +1,7 @@
 <img src="./src/assets/logo.png" width=150 align="left"/>
 
 # Spacestagram
-Webpage that can pull images from NASA's Astronomy API, and allow the user to “like” and “unlike” their favourite images
+Webpage that can pull images from NASA's Astronomy API, and allow the user to “like” and “unlike” their favourite images. Try it out here 👉 [https://dlabbate-spacestagram.netlify.app/]
 
 <br/>
 
@@ -14,13 +14,16 @@ Webpage that can pull images from NASA's Astronomy API, and allow the user to �
 
 ## Overview
 This project pulls data from <a href="https://api.nasa.gov/#apod">Astronomy Picture of the Day (APOD)</a> 
+
 <img src="./src/assets/documentation/overview.gif" />
 
 ## Responsive Masonry Layout
 The fetched data is displayed in a responsive "masonry" layout.
+
 <img src="./src/assets/documentation/responsive.gif" />
 
 ## Google Lighthouse Scores
+<img src="./src/assets/documentation/lighthouse.PNG" />
 
 ## Extras
 
