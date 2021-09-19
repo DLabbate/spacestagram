@@ -1,0 +1,48 @@
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.heart {
+  color: white;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.heart:hover {
+  animation: heartbeat 1s infinite;
+  fill: red;
+  color: red;
+  opacity: 1;
+  transition: 500ms;
+}
+
+.heart--active {
+  fill: red;
+  color: red;
+  opacity: 1;
+}
+
+.astronomy-post__title {
+  display: inline;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, #e0e7ff 50%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0) 50%, #c7d2fe 50%);
+  transition: 500ms;
+  background-size: 100% 100%, 0 100%;
+  background-position: 100% 100%, 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 400ms;
+}
+
+.astronomy-post__title:hover {
+  background-size: 0% 100%, 100% 100%;
+}
