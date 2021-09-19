@@ -13,21 +13,31 @@ Webpage that can pull images from NASA's Astronomy API, and allow the user to â€
 <img alt="Jest" src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white"/> <img alt="Testing-Library" src="https://img.shields.io/badge/-TestingLibrary-%23E33332?style=for-the-badge&logo=testing-library&logoColor=white"/>
 
 ## Overview
-This project pulls data from <a href="https://api.nasa.gov/#apod">Astronomy Picture of the Day (APOD)</a> and displays the data in a "masonry" layout.
+This project pulls data from <a href="https://api.nasa.gov/#apod">Astronomy Picture of the Day (APOD)</a> 
+<img src="./src/assets/documentation/overview.gif" />
+
+## Responsive Masonry Layout
+The fetched data is displayed in a responsive "masonry" layout.
+<img src="./src/assets/documentation/responsive.gif" />
 
 ## Google Lighthouse Scores
 
 ## Extras
 
 ### Select a Date Range
+<img src="./src/assets/documentation/date.gif" />
 
 ### Likes Saved to Local Storage
+<img src="./src/assets/documentation/local-storage.gif" />
 
 ### Lazy Loading Images
+<img src="./src/assets/documentation/lazy-loading.gif" />
 
 ### Heartbeat Animation (on hover)
+<img src="./src/assets/documentation/heartbeat.gif" />
 
 ### URL Link
+<img src="./src/assets/documentation/url.gif" />
 
 ### Testing
 I implemented some unit tests using `jest` and `react-testing-library`. An example outlined below:
