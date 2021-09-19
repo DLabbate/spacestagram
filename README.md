@@ -30,6 +30,18 @@ This project pulls data from <a href="https://api.nasa.gov/#apod">Astronomy Pict
 ### URL Link
 
 ### Testing
+I implemented some unit tests using `jest` and `react-testing-library`. An example outlined below:
+
+```javascript
+const date = new Date(2021, 3, 17);
+
+test("date is formatted in YYYY-MM-DD", () => {
+  const formattedDate = formatDate(date);
+  expect(formattedDate).toBe("2021-04-17");
+});
+```
+
+Note that the testing in this project is not comprehensive, but a work in progress that I would like to continue improving!
 
 ## References
 * <a href="https://www.flaticon.com/">Icons made by Flaticon</a>
