@@ -51,6 +51,7 @@ function App() {
           title={item.title}
           description={item.explanation}
           url={item.url}
+          hdurl={item.hdurl ? item.hdurl : null}
           date={item.date}
           mediaType={item.media_type}
         />

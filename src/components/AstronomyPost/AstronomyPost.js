@@ -9,7 +9,7 @@ import {
 import "./AstronomyPost.css";
 import { useInView } from "react-intersection-observer";
 
-const AstronomyPost = ({ title, description, mediaType, url, date }) => {
+const AstronomyPost = ({ title, description, mediaType, url, hdurl, date }) => {
   const [liked, setLiked] = useState(isLiked(date));
   const [loaded, setLoaded] = useState(false);
 
@@ -104,7 +104,10 @@ const AstronomyPost = ({ title, description, mediaType, url, date }) => {
   const Content = () => {
     return (
       <div className="m-6">
-        <h3 className="text-lg font-bold">{title}</h3>
+        <a href={hdurl ? hdurl : url} target="_blank" rel="noopener noreferrer">
+          <h3 className="text-lg font-bold astronomy-post__title">{title}</h3>
+        </a>
+
         <h4 className="text-sm">{formatDateCommas(new Date(date))}</h4>
         <p className="mt-4">{description}</p>
 
