@@ -1,70 +1,57 @@
-# Getting Started with Create React App
+<img src="./src/assets/logo.png" width=150 align="left"/>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Spacestagram
+Webpage that can pull images from NASA's Astronomy API, and allow the user to “like” and “unlike” their favourite images
 
-## Available Scripts
+<br/>
 
-In the project directory, you can run:
+## Tech Stack
+### Frontend
+<img alt="React" src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"/> <img alt="JavaScript" src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E"/> ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-### `npm start`
+### Testing
+<img alt="Jest" src="https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white"/> <img alt="Testing-Library" src="https://img.shields.io/badge/-TestingLibrary-%23E33332?style=for-the-badge&logo=testing-library&logoColor=white"/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Overview
+This project pulls data from <a href="https://api.nasa.gov/#apod">Astronomy Picture of the Day (APOD)</a> 
+<img src="./src/assets/documentation/overview.gif" />
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Responsive Masonry Layout
+The fetched data is displayed in a responsive "masonry" layout.
+<img src="./src/assets/documentation/responsive.gif" />
 
-### `npm test`
+## Google Lighthouse Scores
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Extras
 
-### `npm run build`
+### Select a Date Range
+<img src="./src/assets/documentation/date.gif" />
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Likes Saved to Local Storage
+<img src="./src/assets/documentation/local-storage.gif" />
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Lazy Loading Images
+<img src="./src/assets/documentation/lazy-loading.gif" />
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Heartbeat Animation (on hover)
+<img src="./src/assets/documentation/heartbeat.gif" />
 
-### `npm run eject`
+### URL Link
+<img src="./src/assets/documentation/url.gif" />
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Testing
+I implemented some unit tests using `jest` and `react-testing-library`. An example outlined below:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```javascript
+const date = new Date(2021, 3, 17);
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+test("date is formatted in YYYY-MM-DD", () => {
+  const formattedDate = formatDate(date);
+  expect(formattedDate).toBe("2021-04-17");
+});
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Note that the testing in this project is not comprehensive, but a work in progress that I would like to continue improving!
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## References
+* <a href="https://www.flaticon.com/">Icons made by Flaticon</a>
