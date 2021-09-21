@@ -4,7 +4,9 @@
  * @returns {string} YYYY-MM-DD format, e.g "2021-04-17"
  */
 export const formatDate = (date) => {
-  return date.toISOString().split("T")[0];
+  return new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+    .toISOString()
+    .split("T")[0];
 };
 
 /**
